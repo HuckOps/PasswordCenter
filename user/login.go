@@ -13,14 +13,15 @@ import (
 )
 
 type User struct {
-	User string `json:"user" bson:"user"`
-	Password string `json:"password" bson:"password"`
-	Tag []primitive.ObjectID `json:"tag" bson:"tag"`
+	ID       primitive.ObjectID   `bson:"_id"`
+	User     string               `json:"user" bson:"user"`
+	Password string               `json:"password" bson:"password"`
+	Tag      []primitive.ObjectID `json:"tag" bson:"tag"`
 }
 
-func Login(c *gin.Context){
+func Login(c *gin.Context) {
 	user := User{}
-	if err := c.ShouldBind(&user) ; err != nil{
+	if err := c.ShouldBind(&user); err != nil {
 		c.JSON(http.StatusOK, gin.H{"code": -1})
 		return
 	}
@@ -42,6 +43,5 @@ func Login(c *gin.Context){
 		tagList = append(tagList, tagTmp.Tag)
 	}
 	tokenString, _ := token.GenToken(user.User)
-	c.JSON(http.StatusOK, gin.H{"token":tokenString, "tag": tagList})
+	c.JSON(http.StatusOK, gin.H{"token": tokenString, "tag": tagList})
 }
-

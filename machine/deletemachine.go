@@ -28,7 +28,6 @@ func DeleteMachine(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"code": 101})
 		return
 	}
-	fmt.Println([]primitive.ObjectID{machine.Tag, tag.SATarget})
 	if err := db.DB.Collection("user").FindOne(context.TODO(), bson.M{"user": c.MustGet("username").(string), "tag": bson.M{"$in": []primitive.ObjectID{machine.Tag, tag.SATarget}}}).Decode(&userTmp); err != nil {
 		fmt.Println(err)
 		c.JSON(http.StatusOK, gin.H{"code": 102})
