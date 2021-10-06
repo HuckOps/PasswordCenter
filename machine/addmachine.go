@@ -13,10 +13,13 @@ import (
 )
 
 type Machine struct {
-	Hostname string             `json:"hostname" bson:"hostname"`
-	IP       string             `json:"ip" bson:"ip"`
-	Tag      primitive.ObjectID `bson:"tag"`
-	Target   string             `json:"target"`
+	Hostname   string             `json:"hostname" bson:"hostname"`
+	IP         string             `json:"ip" bson:"ip"`
+	Tag        primitive.ObjectID `bson:"tag"`
+	Target     string             `json:"target"`
+	Ciphertext string             `bson:"ciphertext"`
+	IV         string             `bson:"iv"`
+	Key        string             `bson:"key"`
 }
 
 func AddMachine(c *gin.Context) {

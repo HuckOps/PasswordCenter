@@ -20,5 +20,6 @@ func PasswordCenterWebAPI(e *gin.Engine) {
 		PasswordCenterWebAPIGroup.POST("adduser", token.JWTAuthMiddleware(), user.AddUser)
 		PasswordCenterWebAPIGroup.POST("deleteuser", token.JWTAuthMiddleware(), user.DeleteUser)
 		PasswordCenterWebAPIGroup.GET("machinelist", token.JWTAuthMiddleware(), machine.MachineList)
+		PasswordCenterWebAPIGroup.POST("password", token.JWTAuthMiddleware(), machine.GetPassword)
 	}
 }
